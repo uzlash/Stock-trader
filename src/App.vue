@@ -1,8 +1,11 @@
 <template>
-  <div id="app">
-    <div id="nav"></div>
+  <div id="app" class="container">
     <Header />
-    <router-view />
+    <div class="row row-custom">
+      <div class="col-md-12">
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -16,3 +19,13 @@ export default {
   }
 };
 </script>
+
+<style>
+body {
+  padding: 30px;
+}
+
+.row-custom {
+  padding: 30px;
+}
+</style>
