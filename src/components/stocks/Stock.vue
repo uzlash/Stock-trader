@@ -12,15 +12,16 @@
             class="form-control"
             placeholder="Quantity"
             v-model="quantity"
+            :class="{ 'border-danger': insufficientFunds }"
           />
         </div>
         <div class="float-right card-text">
           <button
             class="btn btn-success"
-            :disabled="quantity <= 0"
+            :disabled="insufficientFunds || quantity <= 0"
             @click="buyStock"
           >
-            Buy
+            {{ insufficientFunds ? "Insufficient Funds" : "Buy" }}
           </button>
         </div>
       </div>
@@ -36,13 +37,22 @@ export default {
   }),
   methods: {
     buyStock() {
-      const stockOrder = {
+      const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
         quantity: parseInt(this.quantity)
       };
-      console.log(stockOrder);
+      // console.log(order);
+      this.$store.dispatch("buyStock", order);
       this.quantity = 0;
+    }
+  },
+  computed: {
+    funds() {
+      return this.$store.getters.funds;
+    },
+    insufficientFunds() {
+      return this.quantity * this.stock.price > this.funds;
     }
   }
 };

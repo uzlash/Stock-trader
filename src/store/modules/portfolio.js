@@ -16,6 +16,7 @@ const mutations = {
         quantity: quantity
       });
     }
+    // console.log(stocks)
     state.funds -= stockPrice * quantity;
   },
   SELL_STOCK(state, { stockId, quantity, stockPrice }) {
@@ -30,7 +31,7 @@ const mutations = {
 };
 
 const actions = {
-  sellStocks({ commit }, order) {
+  sellStock({ commit }, order) {
     commit("SELL_STOCK", order);
   }
 };
@@ -38,7 +39,7 @@ const actions = {
 const getters = {
   stockPortfolio(state, getters) {
     return state.stocks.map(stock => {
-      const record = getters.stocks.find(element => element == stock.id);
+      const record = getters.stocks.find(element => element.id == stock.id);
       return {
         id: stock.id,
         quantity: stock.quantity,
