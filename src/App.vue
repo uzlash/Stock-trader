@@ -1,10 +1,8 @@
 <template>
   <div id="app" class="container">
     <Header />
-    <div class="row row-custom">
-      <div class="col-md-12">
-        <router-view />
-      </div>
+    <div class="row-custom">
+      <router-view />
     </div>
   </div>
 </template>
@@ -16,16 +14,19 @@ import Header from "./components/Header";
 export default {
   components: {
     Header
+  },
+  created() {
+    this.$store.dispatch("initStocks");
   }
 };
 </script>
 
 <style>
 body {
-  padding: 30px;
+  padding: 20px;
 }
 
 .row-custom {
-  padding: 30px;
+  padding: 20px;
 }
 </style>
